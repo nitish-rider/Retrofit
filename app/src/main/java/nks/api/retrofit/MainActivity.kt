@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity() {
 
         button.setOnClickListener {
             val myNumber=number_editText.text.toString()
-            viewModel.getCustomPost(Integer.parseInt(myNumber))
+            viewModel.getCustomPost(Integer.parseInt(myNumber),"id","desc")
 
             viewModel.myCustomPost.observe(this, Observer {response->
                 if(response.isSuccessful) {

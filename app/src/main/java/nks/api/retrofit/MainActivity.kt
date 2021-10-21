@@ -23,7 +23,7 @@ class MainActivity : AppCompatActivity() {
             val myNumber=number_editText.text.toString()
 //            viewModel.getCustomPost(Integer.parseInt(myNumber),"id","desc") //for @Query
             val options:HashMap<String,String> =HashMap()
-            options["_sort"] = "id"
+            options["_sort"] = "d"
             options["_order"] = "desc"
             viewModel.getCustomPost2(Integer.parseInt(myNumber),options)//for @QueryMap
 

@@ -16,7 +16,7 @@ interface SimpleApi {
         @Path("postNumber") number: Int
     ):Response<Post>
 
-    @GET("post")
+    @GET("posts")
     suspend fun getCustomPost(
         @Query("userId") userId:Int,
         @Query("_sort") sort:String,

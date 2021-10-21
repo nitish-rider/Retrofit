@@ -23,7 +23,7 @@ interface SimpleApi {
 
     @GET("posts")
     suspend fun getCustomPost2(
-        @Query("userId") userId:Int,
+        @Query("userd") userId:Int,
         @QueryMap options:Map<String,String>
     ):Response<List<Post>>
 

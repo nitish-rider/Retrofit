@@ -5,8 +5,8 @@ import nks.api.retrofit.model.Post
 import retrofit2.Response
 
 class Repository {
-    suspend fun getPost():Response<Post>{
-        return RetrofitInstance.api.getPost()
+    suspend fun getPost(auth:String):Response<Post>{
+        return RetrofitInstance.api.getPost(auth)
     }
 
     suspend fun getPost2(number:Int):Response<Post>{
@@ -19,5 +19,8 @@ class Repository {
 
     suspend fun getCustomPost2(userId:Int,options:Map<String,String>):Response<List<Post>>{
         return RetrofitInstance.api.getCustomPost2(userId,options)
+    }
+    suspend fun pushPost(post: Post): Response<Post>{
+        return RetrofitInstance.api.pushPost(post)
     }
 }

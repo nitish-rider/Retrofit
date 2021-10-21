@@ -2,15 +2,15 @@ package nks.api.retrofit.api
 
 import nks.api.retrofit.model.Post
 import retrofit2.Response
-import retrofit2.http.GET
-import retrofit2.http.Path
-import retrofit2.http.Query
-import retrofit2.http.QueryMap
+import retrofit2.http.*
 
 interface SimpleApi {
 
+    @Headers(
+        "Platform:Android",
+    )
     @GET("posts/1")
-    suspend fun getPost():Response<Post>
+    suspend fun getPost(@Header("Auth") auth:String):Response<Post>
 
     @GET("posts/{postNumber}")
     suspend fun getPost2(
@@ -30,4 +30,8 @@ interface SimpleApi {
         @QueryMap options:Map<String,String>
     ):Response<List<Post>>
 
+    @POST("posts")
+    suspend fun pushPost(
+        @Body post: Post
+    ):Response<Post>
 }

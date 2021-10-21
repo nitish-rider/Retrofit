@@ -21,9 +21,13 @@ class MainActivity : AppCompatActivity() {
 
         button.setOnClickListener {
             val myNumber=number_editText.text.toString()
-            viewModel.getCustomPost(Integer.parseInt(myNumber),"id","desc")
+//            viewModel.getCustomPost(Integer.parseInt(myNumber),"id","desc") //for @Query
+            val options:HashMap<String,String> =HashMap()
+            options["_sort"] = "id"
+            options["_order"] = "desc"
+            viewModel.getCustomPost2(Integer.parseInt(myNumber),options)//for @QueryMap
 
-            viewModel.myCustomPost.observe(this, Observer {response->
+            viewModel.myCustomPost2.observe(this, Observer {response->
                 if(response.isSuccessful) {
                     text.text=response.body().toString()
                     response.body()?.forEach{

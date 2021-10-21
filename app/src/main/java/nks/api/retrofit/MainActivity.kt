@@ -6,6 +6,7 @@ import android.util.Log
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import kotlinx.android.synthetic.main.activity_main.*
+import nks.api.retrofit.model.Post
 import nks.api.retrofit.repository.Repository
 
 class MainActivity : AppCompatActivity() {
@@ -19,32 +20,23 @@ class MainActivity : AppCompatActivity() {
         viewModel=ViewModelProvider(this,viewModelFactory).get(MainViewModel::class.java)
 
 
-        button.setOnClickListener {
-            val myNumber=number_editText.text.toString()
-//            viewModel.getCustomPost(Integer.parseInt(myNumber),"id","desc") //for @Query
-            val options:HashMap<String,String> =HashMap()
-            options["_sort"] = "id"
-            options["_order"] = "desc"
-            viewModel.getCustomPost2(Integer.parseInt(myNumber),options)//for @QueryMap
+        val post=Post(1110,2000,"Nitish Kumar Sonthalia","Android Developer")
+        viewModel.pushPost(post)
 
-            viewModel.myCustomPost2.observe(this, Observer {response->
-                if(response.isSuccessful) {
-                    text.text=response.body().toString()
-                    response.body()?.forEach{
-                        Log.d("Response", it.userId.toString())
-                        Log.d("Response", it.id.toString())
-                        Log.d("Response", it.title)
-                        Log.d("Response", it.body)
-                        Log.d("Response", "----------------------")
-                    }
-                }
-                else{
-                    Log.d("Response", response.errorBody().toString())
-                    Log.d("Response", response.code().toString())
+        viewModel.myPushResponse.observe(this, Observer {response->
+            if(response.isSuccessful) {
+                text.text=response.body().toString()
+                Log.d("Response", response.body().toString())
+                Log.d("Response", response.code().toString())
+                Log.d("Response", response.message())
+            }
+            else{
+                Log.d("Response", response.errorBody().toString())
+                Log.d("Response", response.code().toString())
 
-                }
-            })
-        }
+            }
+        })
+
 
 
     }

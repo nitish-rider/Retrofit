@@ -20,10 +20,9 @@ class MainActivity : AppCompatActivity() {
         viewModel=ViewModelProvider(this,viewModelFactory).get(MainViewModel::class.java)
 
 
-        val post=Post(1110,2000,"Nitish Kumar Sonthalia","Android Developer")
-        viewModel.pushPost(post)
+        viewModel.pushPost2(1110,2000,"Nitish Kumar Sonthalia","Android Developer")
 
-        viewModel.myPushResponse.observe(this, Observer {response->
+        viewModel.myPushResponse2.observe(this, Observer {response->
             if(response.isSuccessful) {
                 text.text=response.body().toString()
                 Log.d("Response", response.body().toString())

@@ -7,7 +7,7 @@ import retrofit2.http.Path
 
 interface SimpleApi {
 
-    @GET("posts/1")
+    @GET("pots/1")
     suspend fun getPost():Response<Post>
 
     @GET("posts/{postNumber}")
